@@ -1,4 +1,4 @@
-# Glasgow Coma Scale Evaluator
+# Glasgow Coma Scale
 
 This program is designed to assess the level of impaired consciousness in patients with brain injuries. It is based on the internationally recognized **Glasgow Coma Scale (GCS)** and allows users to classify the severity of the injury by evaluating three key responses:
 
