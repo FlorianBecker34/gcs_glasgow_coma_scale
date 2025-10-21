@@ -3,91 +3,70 @@ This is a programm designed to evaluate the impaired consciousness in patients a
 The model on which this application is based is called the glasgow coma scale.
 
 Author: Florian Becker
-Date: 2025-10-17
+Date: 2025-10-21
 '''
 import tkinter as tk
 from tkinter import ttk
 
-diaPoints = 0
+
+sumScore = 0
+ocularPoints = 0
+verbalPoints = 0
+motoricPoints = 0
 
 def ocular_response(o_choice):
-    global diaPoints
-    if o_choice == 0:
-        diaPoints += 0
-    if o_choice == 1:
-        diaPoints += 1
-    if o_choice == 2:
-        diaPoints +=2
-    if o_choice == 3: 
-        diaPoints += 3
-    if o_choice == 4:
-        diaPoints += 4
+    global ocularPoints
+    ocularPoints = o_choice
+    dia_score()
 
-
-    return diaPoints
+    
+def verbal_response(v_choice):
+    global verbalPoints
+    verbalPoints = v_choice
+    dia_score()
         
 
-def verbal_response(v_choice):
-    global diaPoints
-    if v_choice == 0:
-        diaPoints += 0
-    if v_choice == 1:
-        diaPoints += 1
-    if v_choice == 2:
-        diaPoints += 2
-    if v_choice == 3:
-        diaPoints += 3
-    if v_choice == 4:
-        diaPoints += 4
-    if v_choice == 5:
-        diaPoints += 5
-
-    return diaPoints    
-
-
 def motoric_response(m_choice):
-    global diaPoints
-    if m_choice == 0:
-        diaPoints += 0
-    if m_choice == 1:
-        diaPoints += 1
-    if m_choice == 2:
-        diaPoints += 2
-    if m_choice == 3:
-        diaPoints += 3
-    if m_choice == 4:
-        diaPoints += 4
-    if m_choice == 5:
-        diaPoints += 5
-    if m_choice == 6:
-        diaPoints += 6
+    global motoricPoints
+    motoricPoints = m_choice
+    dia_score()
 
-    return diaPoints
+
+def dia_score():
+    global sumScore
+    sumScore = ocularPoints + verbalPoints + motoricPoints
+    diaPoints.set(sumScore)
+    diagnosis()
 
 
 def diagnosis():
-    if diaPoints <= 8:
+    score = diaPoints.get()
+
+    if score >= 3 and score <= 8:
         diaLabel1.set("Your patient has severe brain injuries!")
-    if diaPoints >= 9:
+    elif score >= 9 and score <= 12:
         diaLabel1.set("Your patient has moderate brain injuries!")
-    if diaPoints >= 13:
+    elif score >= 13 and score <= 15:
         diaLabel1.set("Your patient has minor brain injuries!")
+    else:
+        diaLabel1.set("Please start/restart your input!")
+
     
-
-
-
-
+    
+    
+# ==== GUI ====
 root = tk.Tk()
-root.geometry("200x400")
-#root.resizable(width=False, height=False)
+root.geometry("650x1200")
 root.title("===== Glasgow Coma Scale (GCS) =====")
+
+diaPoints = tk.IntVar()
+diaLabel1 = tk.StringVar()
 
 
 labelOcular = tk.StringVar()
 labelOcular.set("Ocular response: Please choose from the following options:")
 ocularLabel = tk.Label(root, textvariable=labelOcular, font=("Arial", 14, "underline"))
 ocularLabel.pack(pady=20)
-
 
 ocularButton_1 = ttk.Button(root, text="Not testable (severe trauma to the eyes.)", command=lambda: ocular_response(0))
 ocularButton_1.pack()
@@ -156,62 +135,18 @@ motoricButton_7 = ttk.Button(root, text="Obeys commands", command=lambda: motori
 motoricButton_7.pack()
 
 
-diaLabel1 = tk.StringVar()
+pointsDisplay = tk.Label(root, textvariable=diaPoints, font=("Arial", 16))
+pointsDisplay.pack(pady=20)
+
 diaLabel2 = tk.Label(root, textvariable=diaLabel1, font=("Arial", 14, "bold"))
 diaLabel2.pack(pady=20)
+
+
 diagnosis()
 
 buttonExit = ttk.Button(root, text="Exit", command=root.destroy)
 buttonExit.pack(pady=20)
 
-
-
-
 root.mainloop()
-
-
-
-# print("====== Glasgow Coma Scale (GCS) ======")
-# print("Ocular response: Please choose from the following options:")
-# print("0 = Not testable (severe trauma to the eyes)")
-# print("1 = Does not open eyes")
-# print("2 = Opens eyes in response to pain")
-# print("3 = Opens eyes in response to voice")
-# print("4 = Opens eyes spontaneously")
-
-# ocular_response = int(input("Enter your choice:"))
-
-# print("Verbal response: Please choose from the following options:")
-# print("0 = Not testable (Intubation, non-oral language disability, linguistic barrier)")
-# print("1 = Makes no sounds")
-# print("2 = Incomprehensible sounds")
-# print("3 = Inappropriate words")
-# print("4 = Confused and disoriented, but able to answer questions")
-# print("5 = Oriented to time, person, and place, converses normally")
-
-# verbal_response = int(input("Enter your choice: "))
-
-# print("motoric response: Please choose from the following options:")
-# print("0 = Not testable (acquired causes such as post-stroke, post-neurological injury; congenital/innate such as cerebral palsy)")
-# print("1 = Makes no movements")
-# print("2 = Abnormal extension")
-# print("3 = Abnormal flexion")
-# print("4 = Flexion/ Withdrawal from painful stimuli")
-# print("5 = Moves to localise pain")
-# print("6 = Obeys commands")
-
-# motoric_response = int(input("Enter your choice: "))
-
-# points_sum = ocular_response + verbal_response + motoric_response
-
-# if points_sum <= 8:
-#     diagnosis = "severe brain injuries"
-# elif points_sum >= 9 and points_sum <= 12:
-#     diagnosis = "moderate brain injuries"
-# elif points_sum >= 13:
-#     diagnosis = "minor brain injuries"
-
-# print(f"Your patient has {diagnosis}.")
-# print("====== Application closed ======")
 
 
