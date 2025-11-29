@@ -3,7 +3,7 @@ This is a programm designed to evaluate the impaired consciousness in patients a
 The model on which this application is based is called the glasgow coma scale.
 
 Author: Florian Becker
-Date: 2025-10-21
+Date: 2025-11-29
 '''
 import tkinter as tk
 from tkinter import ttk
@@ -43,20 +43,21 @@ def diagnosis():
     score = diaPoints.get()
 
     if score >= 3 and score <= 8:
-        diaLabel1.set("Your patient has severe brain injuries!")
+        diaLabel1.set("Your patient has a severe traumatic brain injury / impaired consciousness.")
     elif score >= 9 and score <= 12:
-        diaLabel1.set("Your patient has moderate brain injuries!")
+        diaLabel1.set("Your patient has a moderate traumatic brain injury / impaired consciousness.")
     elif score >= 13 and score <= 15:
-        diaLabel1.set("Your patient has minor brain injuries!")
+        diaLabel1.set("Your patient has a mild traumatic brain injury / impaired consciousness")
     else:
-        diaLabel1.set("Please start/restart your input!")
+        diaLabel1.set("Please repeat your entry!")
 
     
     
     
 # ==== GUI ====
 root = tk.Tk()
-root.geometry("650x1200")
+root.geometry("800x1200")
+root.maxsize(width="800", height="1200")
 root.title("===== Glasgow Coma Scale (GCS) =====")
 
 diaPoints = tk.IntVar()
@@ -64,48 +65,44 @@ diaLabel1 = tk.StringVar()
 
 
 labelOcular = tk.StringVar()
-labelOcular.set("Ocular response: Please choose from the following options:")
+labelOcular.set("Ocular response: Please choose from following options:")
 ocularLabel = tk.Label(root, textvariable=labelOcular, font=("Arial", 14, "underline"))
-ocularLabel.pack(pady=20)
+ocularLabel.pack(pady=15)
 
-ocularButton_1 = ttk.Button(root, text="Not testable (severe trauma to the eyes.)", command=lambda: ocular_response(0))
-ocularButton_1.pack()
 
-ocularButton_2 = ttk.Button(root, text="Does not open eyes", command=lambda: ocular_response(1))
-ocularButton_2.pack()
+ocularButton_1 = ttk.Button(root, text="No response / Not testable", command=lambda: ocular_response(1))
+ocularButton_1.pack(fill="x")
 
-ocularButton_3 = ttk.Button(root, text="Opens eyes in response to pain", command=lambda: ocular_response(2))
-ocularButton_3.pack()
+ocularButton_2 = ttk.Button(root, text="Opens eyes in response to pain", command=lambda: ocular_response(2))
+ocularButton_2.pack(fill="x")
 
-ocularButton_4 = ttk.Button(root, text="Opens eyes in response to voice", command=lambda: ocular_response(3))
-ocularButton_4.pack()
+ocularButton_3 = ttk.Button(root, text="Opens eyes in response to voice", command=lambda: ocular_response(3))
+ocularButton_3.pack(fill="x")
 
-ocularButton_5 = ttk.Button(root, text="Opens eyes spontaneously", command=lambda: ocular_response(4))
-ocularButton_5.pack()
+ocularButton_4 = ttk.Button(root, text="Opens eyes spontaneously", command=lambda: ocular_response(4))
+ocularButton_4.pack(fill="x")
 
 
 labelVerbal = tk.StringVar()
 labelVerbal.set("Verbal response: Please choose from the following options:")
 verbalLabel = tk.Label(root, textvariable=labelVerbal, font=("Arial", 14, "underline"))
-verbalLabel.pack(pady=20)
+verbalLabel.pack(pady=15)
 
-verbalButton_1 = ttk.Button(root, text="Not testable (Intubation, non-oral language disability, linguistic barrier)", command=lambda: verbal_response(0))
-verbalButton_1.pack()
 
-verbalButton_2 = ttk.Button(root, text="Makes no sounds", command=lambda: verbal_response(1))
-verbalButton_2.pack()
+verbalButton_1 = ttk.Button(root, text="No response / Not testable", command=lambda: verbal_response(1))
+verbalButton_1.pack(fill="x")
 
-verbalButton_3 = ttk.Button(root, text="Incomprehensible sounds", command=lambda: verbal_response(2))
-verbalButton_3.pack()
+verbalButton_2 = ttk.Button(root, text="Incomprehensible sounds", command=lambda: verbal_response(2))
+verbalButton_2.pack(fill="x")
 
-verbalButton_4 = ttk.Button(root, text="Inappropriate words", command=lambda: verbal_response(3))
-verbalButton_4.pack()
+verbalButton_3 = ttk.Button(root, text="Inappropriate words", command=lambda: verbal_response(3))
+verbalButton_3.pack(fill="x")
 
-verbalButton_5 = ttk.Button(root, text="Confused and disoriented, but able to answer questions", command=lambda: verbal_response(4))
-verbalButton_5.pack()
+verbalButton_4 = ttk.Button(root, text="Confused and disoriented, but able to answer questions", command=lambda: verbal_response(4))
+verbalButton_4.pack(fill="x")
 
-verbalButton_6 = ttk.Button(root, text="Oriented to time, person, and place, converses normally", command=lambda: verbal_response(5))
-verbalButton_6.pack()
+verbalButton_5 = ttk.Button(root, text="Oriented to time, person, and place, converses normally", command=lambda: verbal_response(5))
+verbalButton_5.pack(fill="x")
 
 
 labelMotoric = tk.StringVar()
@@ -113,40 +110,36 @@ labelMotoric.set("Motoric response: Please choose from the following options:")
 motoricLabel = tk.Label(root, textvariable=labelMotoric, font=("Arial", 14, "underline"))
 motoricLabel.pack(pady=20)
 
-motoricButton_1 = ttk.Button(root, text="Not testable (acquired causes such as post-stroke, post-neurological injury; congenital/innate such as cerebral palsy)", command=lambda: motoric_response(0))
-motoricButton_1.pack()
 
-motoricButton_2 = ttk.Button(root, text="Makes no movements", command=lambda: motoric_response(1))
-motoricButton_2.pack()
+motoricButton_1 = ttk.Button(root, text="No response / Not testable", command=lambda: motoric_response(1))
+motoricButton_1.pack(fill="x")
 
-motoricButton_3 = ttk.Button(root, text="Abnormal extension", command=lambda: motoric_response(2))
-motoricButton_3.pack()
+motoricButton_2 = ttk.Button(root, text="Stretching synergies", command=lambda: motoric_response(2))
+motoricButton_2.pack(fill="x")
 
-motoricButton_4 = ttk.Button(root, text="Abnormal flexion", command=lambda: motoric_response(3))
-motoricButton_4.pack()
+motoricButton_3 = ttk.Button(root, text="Flexion synergies", command=lambda: motoric_response(3))
+motoricButton_3.pack(fill="x")
 
-motoricButton_5 = ttk.Button(root, text="Flexion/ Withdrawal from painful stimuli", command=lambda: motoric_response(4))
-motoricButton_5.pack()
+motoricButton_4 = ttk.Button(root, text="Indiscriminate defensive movements", command=lambda: motoric_response(4))
+motoricButton_4.pack(fill="x")
 
-motoricButton_6 = ttk.Button(root, text="Moves to localise pain", command=lambda: motoric_response(5))
-motoricButton_6.pack()
+motoricButton_5 = ttk.Button(root, text="Targeted defensive movements", command=lambda: motoric_response(5))
+motoricButton_5.pack(fill="x")
 
-motoricButton_7 = ttk.Button(root, text="Obeys commands", command=lambda: motoric_response(6))
-motoricButton_7.pack()
+motoricButton_6 = ttk.Button(root, text="Follows requests", command=lambda: motoric_response(6))
+motoricButton_6.pack(fill="x")
 
 
 pointsDisplay = tk.Label(root, textvariable=diaPoints, font=("Arial", 16))
-pointsDisplay.pack(pady=20)
+pointsDisplay.pack(pady=15)
 
 diaLabel2 = tk.Label(root, textvariable=diaLabel1, font=("Arial", 14, "bold"))
-diaLabel2.pack(pady=20)
+diaLabel2.pack(pady=25)
 
 
 diagnosis()
 
 buttonExit = ttk.Button(root, text="Exit", command=root.destroy)
-buttonExit.pack(pady=20)
+buttonExit.pack()
 
 root.mainloop()
-
-
